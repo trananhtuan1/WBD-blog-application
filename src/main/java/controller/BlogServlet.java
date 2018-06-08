@@ -31,6 +31,23 @@ public class BlogServlet extends javax.servlet.http.HttpServlet {
             case "delete":
                 deleteBlog(request, response);
                 break;
+            case "search":
+                searchBlog(request, response);
+                break;
+        }
+    }
+
+    private void searchBlog(HttpServletRequest request, HttpServletResponse response) {
+        String title = request.getParameter("title");
+
+        request.setAttribute("search", blogService.findBySearch(title));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/search.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -67,7 +84,7 @@ public class BlogServlet extends javax.servlet.http.HttpServlet {
             blog.setContent(content);
             dispatcher = request.getRequestDispatcher("/edit.jsp");
             request.setAttribute("edit", blog);
-            request.setAttribute("message", "done");
+            request.setAttribute("message", "<h4>Edit Done</h4><br>");
         }
         try {
             dispatcher.forward(request, response);
@@ -86,7 +103,7 @@ public class BlogServlet extends javax.servlet.http.HttpServlet {
         Blog blog = new Blog(id, title, content);
         this.blogService.save(blog);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/create.jsp");
-        request.setAttribute("message", "done");
+        request.setAttribute("message", "<h4>Create Done</h4><br>");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -113,9 +130,56 @@ public class BlogServlet extends javax.servlet.http.HttpServlet {
             case "delete":
                 showDeleteBlog(request, response);
                 break;
+            case "view":
+                showViewBlog(request, response);
+                break;
+            case "search":
+                showSearchBlog(request, response);
+                break;
             default:
                 showListBlog(request, response);
                 break;
+        }
+    }
+
+    private void showSearchBlog(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Blog blog = this.blogService.findById(id);
+        RequestDispatcher dispatcher;
+        if (blog == null) {
+            dispatcher = request.getRequestDispatcher("/error.jsp");
+        } else {
+            dispatcher = request.getRequestDispatcher("/search.jsp");
+            request.setAttribute("search", blog);
+        }
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void showViewBlog(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Blog blog = this.blogService.findById(id);
+        RequestDispatcher dispatcher;
+        if (blog == null) {
+            dispatcher = request.getRequestDispatcher("/error.jsp");
+        } else {
+            dispatcher = request.getRequestDispatcher("/view.jsp");
+            request.setAttribute("view", blog);
+        }
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

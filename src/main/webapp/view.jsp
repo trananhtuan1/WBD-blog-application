@@ -9,19 +9,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>
-<p>
-    <a href="/display">BACK</a>
-</p>
-<p>
-    <c:forEach items='${requestScope["x1"]}' var="view">
-        <tr>
-            <td>Title</td>
-            <td>${view.getTitle()}</td>
-        </tr>
-    </c:forEach>
-</p>
+<c:import url="navbar.jsp"/>
+<div class="container">
+    <form method="post">
+        <p>
+            <legend><h1>Blog Details</h1></legend>
+        <div class="form-group">
+            <strong>Title</strong>
+            <br>
+            ${requestScope["view"].getTitle()}
+        </div>
+        <div class="form-group">
+            <strong>Content</strong>
+            <br>
+            ${requestScope["view"].getContent()}
+        </div>
+        </p>
+    </form>
+</div>
+<script src="/assets/js/bootstrap.min.js"></script>
 </body>
 </html>

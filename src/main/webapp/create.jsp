@@ -9,38 +9,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <link href="/assets/css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <title>Title</title>
 </head>
 <body>
-<p>
-    <c:if test='${requestScope["message"]!=null}'>
-        <span class="test">${requestScope["message"]}</span>
-    </c:if>
-</p>
-<p>
-    <a href="index.jsp">back home</a>
-    <br>
-    <a href="/display">back</a>
-</p>
-<form method="post">
+<c:import url="navbar.jsp"/>
+<div class="container">
     <p>
-    <fieldset>
-        <legend>Create Blog</legend>
-        <table>
-            <tr>
-                <td>Title</td>
-                <td><input type="text" name="title"></td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td><textarea name="content" cols="30" rows="10" required="required"></textarea></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Create"></td>
-            </tr>
-        </table>
-    </fieldset>
+        <c:if test='${requestScope["message"]!=null}'>
+            <span class="test">${requestScope["message"]}</span>
+        </c:if>
     </p>
-</form>
+    <form method="post" class="form">
+        <legend><h2>Create Blog</h2></legend>
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" name="title" id="title">
+        </div>
+        <div class="form-group">
+            <label>Content</label>
+            <textarea class="form-control" name="content" cols="22" rows="10" required="required"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="btn-primary">
+        </div>
+    </form>
+</div>
+<script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>

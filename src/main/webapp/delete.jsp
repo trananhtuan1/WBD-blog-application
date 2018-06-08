@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -9,29 +10,29 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<p>
-    <a href="/display">Back</a>
-</p>
-<form method="post">
-    <fieldset>
-        <legend>Delete Blog</legend>
-        <table>
-            <tr>
-                <td>Title</td>
-                <td>${requestScope["delete"].getTitle()}</td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td>${requestScope["delete"].getContent()}</td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Delete"></td>
-            </tr>
-        </table>
-    </fieldset>
-
-</form>
+<c:import url="navbar.jsp"/>
+<div class="container">
+    <form method="post">
+        <br>
+        <legend><h2>Are you sure you want to delete the blog?</h2></legend>
+        <div class="form-group">
+            <Strong>Title</Strong>
+            <br>
+            ${requestScope["delete"].getTitle()}
+        </div>
+        <div class="form-group">
+            <Strong>Content</Strong>
+            <br>
+            ${requestScope["delete"].getContent()}
+        </div>
+        <div>
+            <input type="submit" value="Delete">
+        </div>
+    </form>
+</div>
+<script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>
