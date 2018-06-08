@@ -23,7 +23,7 @@
         </c:if>
     </p>
     <form method="post" class="form">
-        <legend><h2>Create Blog</h2></legend>
+        <legend><h2>Post Blog</h2></legend>
         <div class="form-group">
             <label>Title</label>
             <input class="form-control" type="text" name="title" id="title">
